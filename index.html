@@ -2,20 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Circles</title>
-    <script type="text/javascript" src="paper-full.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.15/howler.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/paperscript" canvas="myCanvas">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Circles</title>
+  <script type="text/javascript" src="paper-full.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.15/howler.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script type="text/paperscript" canvas="myCanvas">
+
         var keyData = {
             a: {
               color: "purple",
               sound: new Howl({
                 src: ["sounds/bubbles.mp3"]
               })
+             
             },
             s: {
               color: "green",
@@ -30,32 +33,29 @@
               })
             }
           };
+
+       
           
-          var sound1 = new Howl({
-            src: ["sounds/bubbles.mp3"]
-          });
-          var sound2 = new Howl({
-            src: ["sounds/clay.mp3"]
-          });
-          
+        
           var circles = [];
-          var rasters=[];
-          
+       
+         
+
+
           function onKeyDown(event) {
             if (keyData[event.key]) {
-              var raster = new Raster('teste');
              
-              var maxPoint = new Point(view.size.width, view.size.height);
-              var randomPoint = Point.random();
-              var point = maxPoint * randomPoint;
-              var newCircle = new Path.Circle(point, 500);
-              newCircle.fillColor = keyData[event.key].color;
-              keyData[event.key].sound.play();
-              circles.push(newCircle);
-              rasters.push(raster.clone().scale(0.9));
-              var group = new Group(circles[i].path, rasters[i]);
-              group.clipped=true;
-
+             
+                var maxPoint = new Point(view.size.width, view.size.height);
+                var randomPoint = Point.random();
+                var point = maxPoint * randomPoint;
+                var newCircle = new Path.Circle(point, 500);
+                newCircle.fillColor = keyData[event.key].color;
+                keyData[event.key].sound.play();
+                circles.push(newCircle);
+              
+              
+              
             }
           }
           
@@ -63,10 +63,26 @@
             for (var i = 0; i < circles.length; i++) {
               circles[i].fillColor.hue += 1;
               circles[i].scale(0.9);
-              rasters[i].scale(0.9)
+              myCircle.fillColor.hue +=1;
             }
           }
+
+
           
+
+          var myStyle = {
+            strokeColor: '#00ffff',
+            fillColor: '#000000',
+            justification: "center",
+            strokeWidth: 50
+          };
+          
+          var myCircle = new Path.Circle({
+            center: [100, 100],
+            radius: 50,
+            justification: 'center',
+          });
+          myCircle.style = myStyle;
 
 
     </script>
@@ -74,11 +90,9 @@
 
 <body>
 
-    <canvas id="myCanvas" resize></canvas>
-    <img id='teste' src="https://images.unsplash.com/photo-1474400643734-8e92a2bdbc2d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0d845135f27e81f30aa6ab85d014f1a5&auto=format&fit=crop&w=750&q=80">
+  <canvas id="myCanvas" resize></canvas>
 
-
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
